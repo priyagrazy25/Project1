@@ -1,0 +1,120 @@
+<div class="container">
+    <form [formGroup]="paymentform" (ngSubmit)="CheckStatus()">
+
+        <label>Enter your name</label>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="text"  formControlName="Username" class="form-control" />
+        </div>
+        <br />
+        <button type="submit">Check Status</button>
+    </form>
+    <div *ngFor="let user of userdata">
+        <div *ngIf="user.Teststatus=='Not yet'">
+            <div class="container">
+                <h5><label class="text-warning">Upcoming Test</label></h5>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>TestModel</th>
+                            <th>TestDate</th>
+                            <th>TestStatus</th>
+                            <th>Result</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{user.Username}}</td>
+                            <td> {{user.Testmodel}}</td>
+                            <td> {{user.Testdate}}</td>
+                            <td> <label class="text-warning">{{user.Teststatus}}</label> </td>
+                            <td> {{user.Result}}</td>
+                            <td> <button type="button" class="btn btn-outline-success" id="TakeTest"
+                                    (click)="TakeTest(user.Testdate)">Take test</button>&nbsp;&nbsp;
+                             <button type="button" class="btn btn-outline-danger" id="TestCancel"
+                                    (click)="TestCancel(user.Testid)">cancel</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div *ngIf="user.Teststatus == 'Cancel'">
+            <div class="container">
+                    <h5><label class="text-danger">Canceled Test</label></h5>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>TestModel</th>
+                            <th>TestDate</th>
+                            <th>TestStatus</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{user.Username}}</td>
+                            <td> {{user.Testmodel}}</td>
+                            <td> {{user.Testdate}}</td>
+                            <td> <label class="text-danger">{{user.Teststatus}}</label></td>
+                            <td> {{user.Result}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+        <div *ngIf="user.Teststatus=='expired'">
+            <div class="container">
+                    <h5><label class="text-danger">Expired Test</label></h5>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>TestModel</th>
+                            <th>TestDate</th>
+                            <th>TestStatus</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{user.Username}}</td>
+                            <td> {{user.Testmodel}}</td>
+                            <td> {{user.Testdate}}</td>
+                            <td><label class="text-danger">{{user.Teststatus}}</label> </td>
+                            <td> {{user.Result}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div *ngIf="user.Teststatus == 'completed'">
+        <div class="container">
+                <h5><label class="text-success">Completed Test</label></h5>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>TestModel</th>
+                            <th>TestDate</th>
+                            <th>TestStatus</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{user.Username}}</td>
+                            <td> {{user.Testmodel}}</td>
+                            <td> {{user.Testdate}}</td>
+                            <td><label class="text-success">{{user.Teststatus}}</label> </td>
+                            <td> {{user.Result}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>  
+       
+    </div>
+</div>
